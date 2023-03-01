@@ -1,5 +1,5 @@
 def foo(input_variable):
-    print(input_variable)
+    print(str(input_variable))
 
 
 variable = "Hello World!"
