@@ -98,11 +98,15 @@ def reverse_tuples(input_list : list) -> list:
 
 # %%
 def remove_tuplicates(input_list : list) -> list:
+    removable=[]
     for i in range(0, len(input_list), 1):
         for j in range(len(input_list)-1, 0, -1):
             if j != i:
                 if input_list[i]==input_list[j]:
-                    input_list.remove(input_list[i])
+                    if(input_list[i] not in removable):
+                        removable.append(input_list[i])
+    for x in removable:
+        input_list.remove(x)
     return input_list
 
 # %%
@@ -115,14 +119,14 @@ def remove_tuplicates(input_list : list) -> list:
 def transpose(input_list : list) -> list:
     result = []
 
-    for i in range(input_list):
+    for i in range(len(input_list)):
         subresult=[]
-        for i in range[input_list[i]]:
+        for j in range(len(input_list[i])):
             subresult.append(0)
         result.append(subresult)
 
-    for i in range(input_list):
-        for j in range(input_list[i]):
+    for i in range(len(input_list)):
+        for j in range(len(input_list[i])):
             result[i][j]=input_list[j][i]
     
     return result
@@ -136,9 +140,17 @@ def transpose(input_list : list) -> list:
 
 # %%
 def split_into_chunks(input_list : list, chunk_size : int) -> list:
-    for i in range(0, len(input_list), chunk_size):
-        yield input_list[i:i + chunk_size]
-    return input_list
+    result = []
+    i = 0
+    while i < len(input_list):
+        j = 0
+        sub_result = []
+        while j < chunk_size and i+j < len(input_list):
+            sub_result.append(input_list[i+j])
+            j = j + 1
+        i = i + j
+        result.append(sub_result)
+    return result
 
 # %%
 #Create a function that can merge n dictionaries
@@ -150,7 +162,7 @@ def split_into_chunks(input_list : list, chunk_size : int) -> list:
 def merge_dicts(*dict) -> dict:
     result = {}
     for d in dict:
-        result.update(d)
+        result = result | d
     return result
 
 # %%
@@ -192,5 +204,3 @@ def mean_key_value(input_dict : dict) -> dict:
 
 # %%
 #If all the functions are created convert this notebook into a .py file and push to your repo
-
-
