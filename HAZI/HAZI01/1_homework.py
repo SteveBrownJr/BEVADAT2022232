@@ -6,13 +6,14 @@
 #input parameters: input_list,start_index,end_index
 
 # %%
-def subset(input_list, start_index, end_index) -> list:
+def subset(input_list:list, start_index:int, end_index:int) -> list:
     output_list = []
 
     i = start_index
 
-    while(i < end_index and i < len(input_list)):
+    while(i <= end_index and i < len(input_list)):
         output_list.append(input_list[i])
+        i = i + 1
     
     return output_list
 
@@ -25,8 +26,8 @@ def subset(input_list, start_index, end_index) -> list:
 # %%
 def every_nth(input_list, step_size) -> list:
     result = []
-    for i in range(0, len(input_list), step_size):
-        result.add(input_list[i])
+    for i in range(step_size-1, len(input_list), step_size):
+            result.append(input_list[i])
     return result
 
 # %%
@@ -38,7 +39,7 @@ def every_nth(input_list, step_size) -> list:
 # %%
 def unique(input_list : list) -> bool:
     for i in range(0, len(input_list), 1):
-        for j in range(len(input_list)-1, 0, -1):
+        for j in range(len(input_list)-1, -1, -1):
             if j != i:
                 if input_list[i]==input_list[j]:
                     return False
@@ -71,7 +72,9 @@ def flatten(input_list : list) -> list:
 def merge_lists(*args) -> list:
     result = []
     for l in args:
-        result = result + l
+        for element in l:
+            if element not in result:
+                result.append(element)
     return result
 
 # %%
@@ -85,10 +88,11 @@ def merge_lists(*args) -> list:
 def reverse_tuples(input_list : list) -> list:
     result = []
     for sub_tuple in input_list:
-        sub_result=()
-        for i in range(len(sub_tuple)-1, 0, -1):
-            sub_result = sub_result + sub_tuple[i]
-        result.append(sub_result)
+        sub_result=[]
+        for i in range(len(sub_tuple)-1, -1, -1):
+            sub_result.append(sub_tuple[i])
+        result.append(tuple(sub_result))
+    return result
 
 # %%
 #Create a function that removes duplicates from a list
@@ -100,7 +104,7 @@ def reverse_tuples(input_list : list) -> list:
 def remove_tuplicates(input_list : list) -> list:
     removable=[]
     for i in range(0, len(input_list), 1):
-        for j in range(len(input_list)-1, 0, -1):
+        for j in range(len(input_list)-1, -1, -1):
             if j != i:
                 if input_list[i]==input_list[j]:
                     if(input_list[i] not in removable):
