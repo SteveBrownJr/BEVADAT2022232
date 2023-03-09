@@ -108,12 +108,19 @@ def array_multi(arr:np.array) -> np.array:
 # array_multi_2d()
 def array_multi_2d(arr:np.array)->np.array:
     return np.prod(arr,axis=1)
+
 # %%
 # Készíts egy olyan függvényt, amit egy meglévő numpy array-hez készít egy bordert nullásokkal. Bementként egy array-t várjon és kimenetként egy array jelenjen meg aminek van border-je
 # Be: [[1,2],[3,4]]
 # Ki: [[0,0,0,0],[0,1,2,0],[0,3,4,0],[0,0,0,0]]
 # add_border()
 
+def add_border(arr):
+    border_size=1
+    new_shape = tuple(dim + border_size * 2 for dim in arr.shape)
+    new_arr = np.zeros(new_shape, dtype=arr.dtype)
+    new_arr[border_size:-border_size, border_size:-border_size] = arr
+    return new_arr
 
 # %%
 # A KÖTVETKEZŐ FELADATOKHOZ NÉZZÉTEK MEG A NUMPY DATA TYPE-JÁT!
