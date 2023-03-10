@@ -35,7 +35,7 @@ def compare_two_array(array1 : np.array, array2 : np.array) -> np.array:
 # get_array_shape()
 # 3D-vel még műküdnie kell!,
  
-def get_dimensions(arr : np.array) -> np.array:
+def get_array_shape(arr : np.array) -> np.array:
     shape = arr.shape
     if len(shape)==1:
         return f"sor: {shape[0]}, oszlop: 1, Depth: 1"
@@ -86,7 +86,7 @@ def replace_odd_numbers(arr:np.array) -> np.array:
 # Be: [1, 2, 5, 0], 2
 # Ki: [-1, 1, 1, -1]
 # replace_by_value()
-def replace_array_elements(arr:np.array, threshold:int)->np.array:
+def replace_by_value(arr : np.array, threshold : int) -> np.array:
     arr[arr < threshold] = -1
     arr[arr >= threshold] = 1
     return arr
@@ -141,7 +141,7 @@ def list_days(date1:str, date2:str)->np.array:
 # Írj egy fügvényt ami vissza adja az aktuális dátumot az alábbi formában: YYYY-MM-DD. Térjen vissza egy 'numpy.datetime64' típussal.
 # Be:
 # Ki: 2017-03-24
-def actual_date()->str:
+def get_act_date() -> str:
     return np.datetime64('now','D')
 
 # %%
@@ -150,5 +150,5 @@ def actual_date()->str:
 # Ki: másodpercben az idó, int-é kasztolva
 # sec_from_1970()
 def sec_from_1970():
-    return np.datetime64('now','s') - np.datetime64('1970-01-01T00:02:00')
-
+    var = (np.datetime64('now','s') - np.datetime64('1970-01-01T00:02:00'))
+    return int(str(var)[:len(str(var))-8])
