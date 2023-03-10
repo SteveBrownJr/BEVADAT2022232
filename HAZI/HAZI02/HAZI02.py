@@ -15,8 +15,8 @@ import numpy as np
 # Ki: [[2,1],[4,3]]
 # column_swap()
 def column_swap(array : np.array) -> np.array:
-    array[:] = np.fliplr(array)
-    return array
+    new_array = np.fliplr(array)
+    return new_array
 
 # %%
 # Készíts egy olyan függvényt ami összehasonlít két array-t és adjon vissza egy array-ben, hogy hol egyenlőek 
@@ -25,7 +25,8 @@ def column_swap(array : np.array) -> np.array:
 # compare_two_array()
 # egyenlő elemszámúakra kell csak hogy működjön
 def compare_two_array(array1 : np.array, array2 : np.array) -> np.array:
-    return np.where(array1 == array2)[0]
+    arr = np.where(array1 == array2)[0]
+    return arr
 
 
 # %%
