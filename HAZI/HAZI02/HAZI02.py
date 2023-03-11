@@ -28,18 +28,16 @@ def compare_two_array(array1 : np.array, array2 : np.array) -> np.array:
     arr = np.where(array1 == array2)[0]
     return arr
 
-
 # %%
 # Készíts egy olyan függvényt, ami vissza adja string-ként a megadott array dimenzióit:
 # Be: [[1,2,3], [4,5,6]]
 # Ki: "sor: 2, oszlop: 3, melyseg: 1"
 # get_array_shape()
-# 3D-vel még műküdnie kell!,
- 
-def get_array_shape(arr : np.array) -> np.array:
+# 3D-vel még műküdnie kell!, 
+def get_array_shape(arr : np.array) -> str:
     shape = arr.shape
     if len(shape)==1:
-        return f"sor: {shape[0]}, oszlop: 1, Depth: 1"
+        return f"sor: {shape[0]}, oszlop: 1, melyseg: 1"
     if len(shape)==2:
         return f"sor: {shape[0]}, oszlop: {shape[1]}, melyseg: 1"
     return f"sor: {shape[0]}, oszlop: {shape[1]}, melyseg: {shape[2]}"
@@ -76,7 +74,7 @@ def eval_classification(lista: list, array:np.array) -> str:
 # Készíts egy olyan függvényt, ahol az 1D array-ben a páratlan számokat -1-re cseréli
 # Be: [1,2,3,4,5,6]
 # Ki: [-1,2,-1,4,-1,6]
-# repalce_odd_numbers()
+# replace_odd_numbers()
 def replace_odd_numbers(arr:np.array) -> np.array:
     arr[arr % 2 == 1] = -1
     return arr
@@ -91,7 +89,6 @@ def replace_by_value(arr : np.array, threshold : int) -> np.array:
     arr[arr < threshold] = -1
     arr[arr >= threshold] = 1
     return arr
-
 
 # %%
 # Készíts egy olyan függvényt, ami egy array értékeit összeszorozza és az eredményt visszaadja
@@ -115,7 +112,6 @@ def array_multi_2d(arr:np.array)->np.array:
 # Be: [[1,2],[3,4]]
 # Ki: [[0,0,0,0],[0,1,2,0],[0,3,4,0],[0,0,0,0]]
 # add_border()
-
 def add_border(arr):
     border_size=1
     new_shape = tuple(dim + border_size * 2 for dim in arr.shape)
@@ -137,11 +133,11 @@ def list_days(date1:str, date2:str)->np.array:
     array = np.array(np.arange(start,end),np.datetime64)
     return array
 
-
 # %%
 # Írj egy fügvényt ami vissza adja az aktuális dátumot az alábbi formában: YYYY-MM-DD. Térjen vissza egy 'numpy.datetime64' típussal.
 # Be:
 # Ki: 2017-03-24
+# get_act_date()
 def get_act_date() -> str:
     return np.datetime64('now','D')
 
@@ -153,3 +149,5 @@ def get_act_date() -> str:
 def sec_from_1970():
     var = (np.datetime64('now','s') - np.datetime64('1970-01-01T00:02:00'))
     return int(str(var)[:len(str(var))-8])
+
+
