@@ -29,8 +29,11 @@ return type: pandas.core.frame.DataFrame
 függvény neve: capitalize_columns
 '''
 #2
-def capitalize_columns():
-    return None
+def capitalize_columns(df_data :pd.DataFrame = csv_to_df())->pd.DataFrame:
+    df_data_capitalized = df_data.copy()
+    df_data_capitalized.columns = [col if 'e' in col else col.upper() for col in df_data_capitalized.columns]
+    return df_data_capitalized
+
 
 '''
 Készíts egy függvényt, ahol egy szám formájában vissza adjuk, hogy hány darab diáknak sikerült teljesíteni a matek vizsgát.
@@ -41,9 +44,11 @@ Egy példa a kimenetre: 5
 return type: int
 függvény neve: math_passed_count
 '''
+
 #3
-def math_passed_count():
-    return None
+def math_passed_count(df_data : pd.DataFrame = csv_to_df()) -> int:
+    df = df_data.copy()
+    return len(df[df['math score'] >= 50])
 
 '''
 Készíts egy függvényt, ahol Dataframe ként vissza adjuk azoknak a diákoknak az adatait (sorokat), akik végeztek előzetes gyakorló kurzust.
@@ -53,9 +58,11 @@ Egy példa a kimenetre: df_did_pre_course
 return type: pandas.core.frame.DataFrame
 függvény neve: did_pre_course
 '''
+
 #4
-def did_pre_course():
-    return None
+def did_pre_course(df_data : pd.DataFrame = csv_to_df()) -> pd.DataFrame:
+    df=df_data.copy()
+    return pd.DataFrame(df[df["test preparation course"]=="completed"])
 
 '''
 Készíts egy függvényt, ahol a bemeneti Dataframet a diákok szülei végzettségi szintjei alapján csoportosításra kerül,
@@ -66,9 +73,11 @@ Egy példa a kimenetre: df_average_scores
 return type: pandas.core.frame.DataFrame
 függvény neve: average_scores
 '''
-#5
-def average_scores():
-    return None
+#5!
+def average_scores(df_data : pd.DataFrame = csv_to_df()) -> pd.DataFrame:
+    dataframe = df_data.copy()
+    dataframe = dataframe.groupby(['parental level of education'])['math score','reading score','writing score'].mean()
+    return dataframe
 
 '''
 Készíts egy függvényt, ami a bementeti Dataframet kiegészíti egy 'age' oszloppal, töltsük fel random 18-66 év közötti értékekkel.
