@@ -89,8 +89,14 @@ return type: pandas.core.frame.DataFrame
 függvény neve: add_age
 '''
 #6
-def add_age():
-    return None
+def add_age(df_data : pd.DataFrame = csv_to_df()) -> pd.DataFrame:
+    df = df_data.copy()
+    df['age'] = ''
+    np.random.seed(42)
+    for i in range(len(df)):
+        df['age'][i] = np.random.randint(low=18,high=66)
+    return df
+
 
 '''
 Készíts egy függvényt, ami vissza adja a legjobb teljesítményt elérő női diák pontszámait.
@@ -101,8 +107,14 @@ return type: tuple
 függvény neve: female_top_score
 '''
 #7
-def female_top_score():
-    return None
+def female_top_score(df_data : pd.DataFrame = csv_to_df()) -> pd.DataFrame:
+    new_df = df_data.copy()
+    best = 0
+    for i in range(len(new_df)):
+        if new_df['gender'][i] == 'female' and new_df['math score'][best] < new_df['math score'][i] and new_df['reading score'][best] < new_df['reading score'][i] and new_df['writing score'][best] < new_df['writing score'][i]:
+            best = i
+    return (new_df['math score'][best],new_df["reading score"][best],new_df["writing score"][best])
+
 
 '''
 Készíts egy függvényt, ami a bementeti Dataframet kiegészíti egy 'grade' oszloppal. 
@@ -120,8 +132,22 @@ return type: pandas.core.frame.DataFrame
 függvény neve: add_grade
 '''
 #8
-def add_grade():
-    return None
+def add_grade(df : pd.DataFrame = csv_to_df()) -> pd.DataFrame:
+    new_df = df.copy()
+    new_df['grade'] = ''
+    for i in range(len(new_df)):
+        min = ((new_df['math score'][i] + new_df['reading score'][i] + new_df['writing score'][i]) / 300)
+        if min < 0.6:
+            new_df['grade'][i] = 'F'
+        elif min >= 0.6 and min < 0.7:
+            new_df['grade'][i] = 'D'
+        elif min >= 0.7 and min < 0.8:
+            new_df['grade'][i] = 'C'
+        elif min >= 0.8 and min < 0.9:
+            new_df['grade'][i] = 'B'
+        elif min >= 0.9:
+            new_df['grade'][i] = 'A'
+    return new_df
 
 '''
 Készíts egy függvényt, ami a bemeneti Dataframe adatai alapján elkészít egy olyan oszlop diagrammot,
@@ -137,8 +163,15 @@ return type: matplotlib.figure.Figure
 függvény neve: math_bar_plot
 '''
 #9
-def math_bar_plot():
-    return None
+def math_bar_plot(df : pd.DataFrame = csv_to_df()):
+    new_df = df.copy()
+    fig = plt.figure()
+    ax = fig.add_axes([0,0,1,1])
+    grouped = new_df.groupby('gender')['math score'].mean()
+    ax.bar(grouped.index,grouped.values)
+    ax.set_ylabel('Math Score')
+    ax.set_xlabel('Gender')
+    return fig
 
 ''' 
 Készíts egy függvényt, ami a bemeneti Dataframe adatai alapján elkészít egy olyan histogramot,
@@ -154,8 +187,14 @@ return type: matplotlib.figure.Figure
 függvény neve: writing_hist
 '''
 #10
-def writing_hist():
-    return None
+def writing_hist(df:pd.DataFrame = csv_to_df()):
+    new_df = df.copy()
+    fig = plt.figure()
+    ax = fig.add_axes([0,0,1,1])
+    ax.hist(new_df['writing score'])
+    ax.set_ylabel('Number of Students')
+    ax.set_xlabel('Writing Score')
+    return fig
 ''' 
 Készíts egy függvényt, ami a bemeneti Dataframe adatai alapján elkészít egy olyan kördiagramot,
 ami vizualizálja a diákok etnikum csoportok szerinti eloszlását százalékosan.
@@ -170,5 +209,9 @@ return type: matplotlib.figure.Figure
 függvény neve: ethnicity_pie_chart
 '''
 #11
-def etnicity_pie_chart():
-    return None
+def ethnicity_pie_chart(df : pd.DataFrame = csv_to_df()):
+    new_df = df.copy()
+    fig,ax = plt.subplots()
+    grouped = new_df.groupby(['race/ethnicity'])['race/ethnicity'].count()
+    ax.pie(grouped,labels=grouped.index,autopct='%1.1f%%')
+    return fig
