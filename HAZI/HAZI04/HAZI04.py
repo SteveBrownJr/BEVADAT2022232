@@ -16,10 +16,9 @@ return type: pandas.core.frame.DataFrame
 függvény neve: csv_to_df
 '''
 #1
-def csv_to_df():
-    return None
-
-
+def csv_to_df(path : str = "StudentsPerformance.csv")->pd.DataFrame:
+    df = pd.read_csv(path)
+    return df
 '''
 Készíts egy függvényt, ami egy DataFrame-et vár paraméterként, 
 és átalakítja azoknak az oszlopoknak a nevét nagybetűsre amelyiknek neve nem tartalmaz 'e' betüt.
