@@ -94,7 +94,7 @@ def add_age(df_data : pd.DataFrame = csv_to_df()) -> pd.DataFrame:
     df['age'] = ''
     np.random.seed(42)
     for i in range(len(df)):
-        df['age'][i] = np.random.randint(low=18,high=66)
+        df['age'][i] = np.random.randint(low=18,high=67)
     return df
 
 
