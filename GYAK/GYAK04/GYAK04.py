@@ -111,5 +111,4 @@ def plot_area(test_df : pd.DataFrame = dict_to_dataframe()) -> plt.Figure:
     fig1, ax1 = plt.subplots()
     ax1.set_title("Area of Countries")
     ax1.pie(df['area'], labels=df['country'])
-    ax1.axis('equal')
     return fig1
