@@ -2,7 +2,25 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import numpy as np
 
+<<<<<<< Updated upstream
 def csv_to_df(path):
+=======
+'''
+FONTOS: Az első feladatáltal visszaadott DataFrame-et kell használni a további feladatokhoz. 
+A függvényeken belül mindig készíts egy másolatot a bemenő df-ről, (new_df = df.copy() és ezzel dolgozz tovább.)
+'''
+
+'''
+Készíts egy függvényt, ami egy string útvonalat vár paraméterként, és egy DataFrame ad visszatérési értékként.
+
+Egy példa a bemenetre: 'test_data.csv'
+Egy példa a kimenetre: df_data
+return type: pandas.core.frame.DataFrame
+függvény neve: csv_to_df
+'''
+#1
+def csv_to_df(path : str = "D:/Egyetem/6. Félév/BEVADAT/BEVADAT2022232/HAZI/HAZI04/StudentsPerformance.csv")->pd.DataFrame:
+>>>>>>> Stashed changes
     df = pd.read_csv(path)
     return df
 
