@@ -20,8 +20,9 @@ class KNNClassifier:
 
     @staticmethod
     def load_csv(csv_path:str)->Tuple[pd.DataFrame,pd.DataFrame]:
+
         df = pd.read_csv(csv_path)
-        df = df.sample(random_state=42,frac=1)  
+        df = df.sample(random_state=42,frac=1).reset_index(drop=True)  
         x = df.iloc[:,:-1]
         y = df.iloc[:,-1]
         return x,y
@@ -33,7 +34,10 @@ class KNNClassifier:
 
         x_train,y_train = features.iloc[:train_size,:],labels.iloc[:train_size]
         x_test,y_test = features.iloc[train_size:,:],labels.iloc[train_size:]
-        self.x_train, self.y_train, self.x_test, self.y_test = x_train, y_train, x_test, y_test
+        self.x_train = x_train
+        self.y_train = y_train
+        self.x_test = x_test
+        self.y_test = y_test
     
     def euclidean(self,element_of_x:pd.DataFrame):
         return ((self.x_train - element_of_x)**2).sum(axis=1)**0.5
@@ -60,7 +64,7 @@ class KNNClassifier:
     def best_k(self) -> Tuple[int, float]:
         best_k = 0
         best_accuracy = 0.0
-        OG_K = self.k
+        original_k = self.k
         for i in range(20):
             self.k = i+1
             self.predict(self.x_test)
@@ -68,5 +72,5 @@ class KNNClassifier:
             if (best_accuracy < current_accuracy):
                 best_k = i+1
                 best_accuracy = current_accuracy
-        self.k = OG_K
+        self.k = original_k
         return best_k, round(best_accuracy, 2)
