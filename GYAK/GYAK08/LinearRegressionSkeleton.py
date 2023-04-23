@@ -20,10 +20,6 @@ class LinearRegression:
             gradient = -2 * np.dot(X.T, error) / n_samples
             self.weights -= self.lr * gradient
         
-   
-
-        
-
     def predict(self, X):
         X = np.insert(X, 0, 1, axis=1)
         y_pred = np.dot(X, self.weights)
