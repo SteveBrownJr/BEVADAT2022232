@@ -44,4 +44,4 @@ class KMeansOnDigits():
         self.get_labels()
         self.calc_accuracy()
         self.confusion_matrix()
-        return self.
+        return self.mat
